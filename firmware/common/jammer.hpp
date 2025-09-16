@@ -26,6 +26,8 @@
 #ifndef __JAMMER_H__
 #define __JAMMER_H__
 
+#include <cstdint>
+
 namespace jammer {
 
 typedef struct jammer_range {
@@ -39,6 +41,28 @@ enum JammerType : uint32_t {
     TYPE_TONE = 1,
     TYPE_SWEEP = 2
 };
+
+// Optimized noise generation functions
+uint32_t optimized_lfsr(uint32_t& lfsr_state);
+int8_t generate_broadband_noise(uint32_t& lfsr1, uint32_t& lfsr2);
+
+// Maximum power configuration
+void configure_max_power_transmission();
+
+// Parameter calculation for optimal jamming
+void calculate_optimal_jamming_params(uint32_t bandwidth_hz, uint32_t& sample_rate, uint32_t& noise_period);
+
+// Frequency hopping for sweep jamming
+uint32_t generate_hop_frequency(uint32_t base_freq, uint32_t bandwidth, uint32_t hop_index, uint32_t total_hops);
+
+// Advanced jamming sample generation
+int8_t generate_jamming_sample(JammerType type, uint32_t& lfsr1, uint32_t& lfsr2,
+                              uint32_t& phase, uint32_t delta, uint32_t sample_count);
+
+// Initialize all jamming parameters for optimal performance
+void initialize_jamming_params(uint32_t bandwidth_hz, JammerType type,
+                              uint32_t& sample_rate, uint32_t& noise_period,
+                              uint32_t& lfsr1, uint32_t& lfsr2);
 
 } /* namespace jammer */
 

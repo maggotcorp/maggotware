@@ -362,8 +362,8 @@ JammerView::JammerView(
 
     field_timetx.set_value(30);
     field_timepause.set_value(1);
-    field_gain.set_value(transmitter_model.tx_gain());
-    field_amp.set_value(transmitter_model.rf_amp());
+    field_gain.set_value(47);  // Maximum TX gain for full power
+    field_amp.set_value(1);    // Enable RF amplifier for maximum power
 
     button_transmit.on_select = [this](Button&) {
         if (jamming || cooling)

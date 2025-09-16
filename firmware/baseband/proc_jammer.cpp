@@ -24,6 +24,7 @@
 #include "portapack_shared_memory.hpp"
 #include "sine_table_int8.hpp"
 #include "event_m4.hpp"
+#include "jammer.hpp"
 
 #include <cstdint>
 
@@ -49,29 +50,16 @@ void JammerProcessor::execute(const buffer_c8_t& buffer) {
             jammer_duration--;
         }
 
-        // Phase noise
+        // Use optimized jamming sample generation
         if (!period_counter) {
             period_counter = noise_period;
-
-            if (noise_type == JammerType::TYPE_FSK) {
-                sample = (sample + lfsr) >> 1;
-            } else if (noise_type == JammerType::TYPE_TONE) {
-                tone_delta = 150000 + (lfsr >> 9);  // Approx 100Hz to 6kHz
-            } else if (noise_type == JammerType::TYPE_SWEEP) {
-                sample++;  // This is like saw wave FM
-            }
-
-            feedback = ((lfsr >> 31) ^ (lfsr >> 29) ^ (lfsr >> 15) ^ (lfsr >> 11)) & 1;
-            lfsr = (lfsr << 1) | feedback;
-            if (!lfsr) lfsr = 0x1337;  // Shouldn't do this :(
+            sample_count++;
         } else {
             period_counter--;
         }
 
-        if (noise_type == JammerType::TYPE_TONE) {
-            aphase += tone_delta;
-            sample = sine_table_i8[(aphase & 0xFF000000) >> 24];
-        }
+        // Generate jamming sample using optimized functions
+        sample = generate_jamming_sample(noise_type, lfsr1, lfsr2, aphase, tone_delta, sample_count);
 
         delta = sample * jammer_bw;
 
@@ -98,7 +86,11 @@ void JammerProcessor::on_message(const Message* const msg) {
             period_counter = 0;
             jammer_duration = 0;
             current_range = 0;
-            lfsr = 0xDEAD0012;
+            sample_count = 0;
+
+            // Initialize LFSR states for optimized noise generation
+            lfsr1 = 0xDEADBEEF;
+            lfsr2 = 0xCAFEBABE;
 
             configured = true;
         } else {
