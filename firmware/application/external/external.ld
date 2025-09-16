@@ -73,6 +73,18 @@ MEMORY
     ram_external_app_scanner    (rwx) : org = 0xADE00000, len = 32k
     ram_external_app_level      (rwx) : org = 0xADE10000, len = 32k
     ram_external_app_gfxeq      (rwx) : org = 0xADE20000, len = 32k
+    ram_external_app_noaaapt_rx   (rwx) : org = 0xADE30000, len = 32k
+    ram_external_app_detector_rx   (rwx) : org = 0xADE40000, len = 32k
+    ram_external_app_dinogame   (rwx) : org = 0xADE50000, len = 32k
+    ram_external_app_spaceinv   (rwx) : org = 0xADE60000, len = 32k
+    ram_external_app_blackjack  (rwx) : org = 0xADE70000, len = 32k
+    ram_external_app_battleship   (rwx) : org = 0xADE80000, len = 32k
+    ram_external_app_ert        (rwx) : org = 0xADE90000, len = 32k
+    ram_external_app_epirb_rx   (rwx) : org = 0xADEA0000, len = 32k
+    ram_external_app_soundboard   (rwx) : org = 0xADEB0000, len = 32k
+    ram_external_app_game2048     (rwx) : org = 0xADEC0000, len = 32k
+
+
 }
 
 SECTIONS
@@ -334,11 +346,18 @@ SECTIONS
         KEEP(*(.external_app.app_stopwatch.application_information));
         *(*ui*external_app*stopwatch*);
     } > ram_external_app_stopwatch
+
    .external_app_wefax_rx : ALIGN(4) SUBALIGN(4)
     {
         KEEP(*(.external_app.app_wefax_rx.application_information));
         *(*ui*external_app*wefax_rx*);
     } > ram_external_app_wefax_rx
+
+   .external_app_noaaapt_rx : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_noaaapt_rx.application_information));
+        *(*ui*external_app*noaaapt_rx*);
+    } > ram_external_app_noaaapt_rx
 
     .external_app_breakout : ALIGN(4) SUBALIGN(4)
     {
@@ -350,19 +369,19 @@ SECTIONS
     {
         KEEP(*(.external_app.app_doom.application_information));
         *(*ui*external_app*doom*);
-    } > ram_external_app_doom    
-    
+    } > ram_external_app_doom
+
     .external_app_debug_pmem : ALIGN(4) SUBALIGN(4)
     {
         KEEP(*(.external_app.app_debug_pmem.application_information));
         *(*ui*external_app*debug_pmem*);
-    } > ram_external_app_debug_pmem    
+    } > ram_external_app_debug_pmem
 
     .external_app_scanner : ALIGN(4) SUBALIGN(4)
     {
         KEEP(*(.external_app.app_scanner.application_information));
         *(*ui*external_app*scanner*);
-    } > ram_external_app_scanner    
+    } > ram_external_app_scanner
 
     .external_app_level : ALIGN(4) SUBALIGN(4)
     {
@@ -375,4 +394,60 @@ SECTIONS
         KEEP(*(.external_app.app_gfxeq.application_information));
         *(*ui*external_app*gfxeq*);
     } > ram_external_app_gfxeq
+
+    .external_app_detector_rx : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_detector_rx.application_information));
+        *(*ui*external_app*detector_rx*);
+    } > ram_external_app_detector_rx
+
+    .external_app_dinogame : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_dinogame.application_information));
+        *(*ui*external_app*dinogame*);
+    } > ram_external_app_dinogame
+
+    .external_app_spaceinv : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_spaceinv.application_information));
+        *(*ui*external_app*spaceinv*);
+    } > ram_external_app_spaceinv
+
+    .external_app_blackjack : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_blackjack.application_information));
+        *(*ui*external_app*blackjack*);
+    } > ram_external_app_blackjack
+
+    .external_app_battleship : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_battleship.application_information));
+        *(*ui*external_app*battleship*);
+    } > ram_external_app_battleship
+
+    .external_app_ert : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_ert.application_information));
+        *(*ui*external_app*ert*);
+    } > ram_external_app_ert
+
+    .external_app_epirb_rx : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_epirb_rx.application_information));
+        *(*ui*external_app*epirb_rx*);
+    } > ram_external_app_epirb_rx
+
+    .external_app_soundboard : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_soundboard.application_information));
+        *(*ui*external_app*soundboard*);
+    } > ram_external_app_soundboard
+
+    .external_app_game2048 : ALIGN(4) SUBALIGN(4)
+    {
+        KEEP(*(.external_app.app_game2048.application_information));
+        *(*ui*external_app*game2048*);
+    } > ram_external_app_game2048
+
 }
+

@@ -110,7 +110,13 @@ set(EXTCPPSRC
 	#wefax_rx
 	external/wefax_rx/main.cpp
 	external/wefax_rx/ui_wefax_rx.cpp
-	
+
+
+	#noaaapt_rx
+	external/noaaapt_rx/main.cpp
+	external/noaaapt_rx/ui_noaaapt_rx.cpp
+
+
 
 	#shoppingcart_lock
 	external/shoppingcart_lock/main.cpp
@@ -188,6 +194,10 @@ set(EXTCPPSRC
 	external/breakout/main.cpp
 	external/breakout/ui_breakout.cpp
 
+	#dinogame
+	external/dinogame/main.cpp
+	external/dinogame/ui_dinogame.cpp
+
 	#doom
 	external/doom/main.cpp
 	external/doom/ui_doom.cpp
@@ -206,7 +216,39 @@ set(EXTCPPSRC
 
 	#gfxEQ
 	external/gfxeq/main.cpp
-	external/gfxeq/ui_gfxeq.cpp	
+	external/gfxeq/ui_gfxeq.cpp
+
+	#detector_rx
+	external/detector_rx/main.cpp
+	external/detector_rx/ui_detector_rx.cpp
+
+	#space_invaders
+	external/spaceinv/main.cpp
+	external/spaceinv/ui_spaceinv.cpp
+
+	#blackjack
+	external/blackjack/main.cpp
+	external/blackjack/ui_blackjack.cpp
+
+	#battleship
+	external/battleship/main.cpp
+	external/battleship/ui_battleship.cpp
+
+	#ert
+	external/ert/main.cpp
+	external/ert/ert_app.cpp
+
+	#epirb_rx
+	external/epirb_rx/main.cpp
+	external/epirb_rx/ui_epirb_rx.cpp
+
+	#soundboard
+	external/soundboard/main.cpp
+	external/soundboard/soundboard_app.cpp
+
+	#game2048
+	external/game2048/main.cpp
+	external/game2048/ui_game2048.cpp
 )
 
 set(EXTAPPLIST
@@ -235,10 +277,11 @@ set(EXTAPPLIST
 	morse_tx
 	sstvtx
 	random_password
-	#acars_rx
+	# acars_rx
 	ookbrute
 	ook_editor
 	wefax_rx
+	noaaapt_rx
 	shoppingcart_lock
 	flippertx
 	remote
@@ -255,9 +298,18 @@ set(EXTAPPLIST
 	snake
 	stopwatch
 	breakout
+	dinogame
 	doom
 	debug_pmem
 	scanner
 	level
 	gfxeq
+	detector_rx
+	spaceinv
+	blackjack
+	battleship
+	ert
+	epirb_rx
+	soundboard
+	game2048
 )

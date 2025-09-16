@@ -50,8 +50,15 @@ enum data_selector {
     BDS_HEADING = 0x60
 };
 
+enum speed_type {
+    SPD_GND = 0,  // Ground Speed
+    SPD_IAS = 1,  // Indicated AirSpeed
+    SPD_TAS = 2   // True AirSpeed
+};
+
 struct adsb_pos {
-    bool valid;
+    bool pos_valid;
+    bool alt_valid;
     float latitude;
     float longitude;
     int32_t altitude;
@@ -59,6 +66,7 @@ struct adsb_pos {
 
 struct adsb_vel {
     bool valid;
+    speed_type type;   // ground speed, IAS or TAS
     int32_t speed;     // knot
     uint16_t heading;  // degree
     int32_t v_rate;    // ft/min
@@ -83,7 +91,7 @@ const float adsb_lat_lut[58] = {
     83.07199445, 83.99173563, 84.89166191, 85.75541621,
     86.53536998, 87.00000000};
 
-const float PI = 3.14159265358979323846;
+#include "mathdef.hpp"
 
 const float NZ = 15.0;
 

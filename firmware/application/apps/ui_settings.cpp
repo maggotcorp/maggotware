@@ -6,7 +6,7 @@
  * Copyright (C) 2024 Mark Thompson
  * Copyright (C) 2024 u-foka
  * Copyright (C) 2024 HTotoo
- * Copyleft (ɔ) 2024 zxkmm under GPL license
+ * copyleft 2024 zxkmm AKA zix aka sommermorgentraum
  *
  * This file is part of PortaPack.
  *
@@ -759,7 +759,7 @@ AppSettingsView::AppSettingsView(
     add_children({&labels,
                   &menu_view});
 
-    menu_view.set_parent_rect({0, 3 * 8, 240, 33 * 8});
+    menu_view.set_parent_rect({0, 3 * 8, screen_width, 33 * 8});
 
     ensure_directory(settings_dir);
 

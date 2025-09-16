@@ -1,6 +1,5 @@
 /*
- * copyleft Elliot Alderson from F society
- * copyleft Darlene Alderson from F society
+ * copyleft 2025 zxkmm AKA zix aka sommermorgentraum
  *
  * This file is part of PortaPack.
  *
@@ -56,7 +55,7 @@ class PlaylistEditorView : public View {
         "New"};
 
     Text text_current_ppl_file{
-        {sizeof("PPL file:") * 8, 0 * 16, screen_width - sizeof("PPL file:") * 8, 16},
+        {sizeof("PPL file:") * 8, 0 * 16, screen_width - (int)sizeof("PPL file:") * 8, 16},
         ""};
 
     MenuView menu_view{};
