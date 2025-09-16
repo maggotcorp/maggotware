@@ -44,7 +44,7 @@ class JammerProcessor : public BasebandProcessor {
     JammerChannel* jammer_channels{};
 
     JammerType noise_type{};
-    uint32_t tone_delta{0}, lfsr{}, feedback{};
+    uint32_t tone_delta{0}, lfsr1{0}, lfsr2{0};
     uint32_t noise_period{0}, period_counter{0};
     uint32_t jammer_duration{0};
     uint32_t current_range{0};

@@ -25,6 +25,7 @@
 #include "portapack_shared_memory.hpp"
 #include "sine_table_int8.hpp"
 #include "event_m4.hpp"
+#include "jammer.hpp"
 
 #include <cstdint>
 #include <random>
@@ -96,6 +97,10 @@ void JammerProcessor::execute(const buffer_c8_t& buffer) {
             period_counter--;
         }
 
+
+        // Generate jamming sample using optimized functions
+        sample = generate_jamming_sample(noise_type, lfsr1, lfsr2, aphase, tone_delta, sample_count);
+
         if (noise_type == jammer::JammerType::TYPE_TONE) {
             aphase += tone_delta;
             sample = sine_table_i8[(aphase & 0xFF000000) >> 24];
@@ -129,11 +134,15 @@ void JammerProcessor::on_message(const Message* const msg) {
             period_counter = 0;
             jammer_duration = 0;
             current_range = 0;
+            sample_count = 0;
+
+            // Initialize LFSR states for optimized noise generation
+            lfsr1 = 0xDEADBEEF;
+            lfsr2 = 0xCAFEBABE;
             lfsr = 0xDEAD0012;
             wave_phase = 0;
             wave_index = 0;
             chirp_freq = 0.0f;
-
             configured = true;
         } else {
             configured = false;
