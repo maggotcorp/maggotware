@@ -595,8 +595,10 @@ DeclareTargets(PNRR nrfrx)
 
 ### Jammer
 
+set(MODE_INCDIR ${PROJECT_SOURCE_DIR}/../application ${PROJECT_SOURCE_DIR}/../application/hw ${PROJECT_SOURCE_DIR}/../application/ui)
 set(MODE_CPPSRC
 	proc_jammer.cpp
+	${COMMON}/jammer.cpp
 )
 DeclareTargets(PJAM jammer)
 

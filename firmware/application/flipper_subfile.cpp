@@ -176,22 +176,25 @@ bool seek_flipper_binraw_first_data(File& f, bool seekzero) {
 
 Optional<int32_t> read_flipper_raw_next_data(File& f) {
     // RAW_Data: 5832 -12188 130 -162
-    std::string chs = "";
-    char ch = 0;
-    while (f.read(&ch, 1).is_ok()) {
-        if (ch == '\r') continue;  // should not present
-        if ((ch == ' ') || ch == '\n') {
-            if (chs == "RAW_Data:") {
-                chs = "";
-                continue;
-            }
-            break;
-        };
-        if (ch == 0) break;
-        chs += ch;
+    while (true) {
+        std::string chs = "";
+        char ch = 0;
+        while (f.read(&ch, 1).is_ok()) {
+            if (ch == '\r') continue;  // should not present
+            if ((ch == ' ') || ch == '\n') {
+                if (chs == "RAW_Data:") {
+                    chs = "";
+                    continue;
+                }
+                break;
+            };
+            if (ch == 0) break;
+            chs += ch;
+        }
+        if (chs != "") return atol(chs.c_str());
+        // If no data found, seek back to the first RAW_Data and continue
+        if (!seek_flipper_raw_first_data(f)) return {};  // If seek fails, return empty
     }
-    if (chs == "") return {};
-    return atol(chs.c_str());
 }
 
 Optional<uint8_t> read_flipper_binraw_next_data(File& f) {
