@@ -192,7 +192,6 @@ set(CPPSRC
 	core_control.cpp
 	database.cpp
 	gradient.cpp
-	rfm69.cpp
 	event_m0.cpp
 	file_reader.cpp
 	file.cpp
@@ -261,7 +260,6 @@ set(CPPSRC
 	ui/ui_receiver.cpp
 	ui/ui_rssi.cpp
 	ui/ui_freqlist.cpp
-	ui/ui_tv.cpp
 	ui/ui_spectrum.cpp
 	ui/ui_tabview.cpp
 	ui/ui_textentry.cpp
@@ -279,7 +277,6 @@ set(CPPSRC
 	apps/ui_aprs_rx.cpp
 	apps/ui_aprs_tx.cpp
 	apps/ui_battinfo.cpp
-	apps/ui_bht_tx.cpp
 	apps/ui_bmp_file_viewer.cpp
 	apps/ui_btle_rx.cpp
 	apps/ui_debug.cpp
@@ -314,7 +311,6 @@ set(CPPSRC
 	apps/ui_weatherstation.cpp
 	protocols/aprs.cpp
 	protocols/ax25.cpp
-	protocols/bht.cpp
 	protocols/dcs.cpp
 	protocols/encoders.cpp
 	protocols/modems.cpp
