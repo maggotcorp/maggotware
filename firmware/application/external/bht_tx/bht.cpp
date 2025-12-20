@@ -21,7 +21,8 @@
  */
 
 #include "bht.hpp"
-#include "portapack_persistent_memory.hpp"
+
+namespace ui::external_app::bht_tx {
 
 size_t gen_message_ep(uint8_t city_code, size_t family_code_ep, uint32_t relay_number, uint32_t relay_state) {
     size_t c;
@@ -152,3 +153,5 @@ std::string ccir_to_ascii(uint8_t* ccir) {
 
     return ascii;
 }
+
+}  // namespace ui::external_app::bht_tx

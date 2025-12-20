@@ -57,13 +57,13 @@ void JammerProcessor::execute(const buffer_c8_t& buffer) {
             period_counter = noise_period;
 
             if (noise_type == jammer::JammerType::TYPE_FSK) {
-                sample = (sample + lfsr) >> 1;
+                sample = (sample + lfsr1) >> 1;
             } else if (noise_type == jammer::JammerType::TYPE_TONE) {
-                tone_delta = 150000 + (lfsr >> 9);
+                tone_delta = 150000 + (lfsr1 >> 9);
             } else if (noise_type == jammer::JammerType::TYPE_SWEEP) {
                 sample++;
             } else if (noise_type == jammer::JammerType::TYPE_RANDOM) {
-                sample = lfsr & 0xFF;
+                sample = lfsr1 & 0xFF;
             } else if (noise_type == jammer::JammerType::TYPE_SINE) {
                 wave_phase += 0x01000000;
                 sample = sine_table_i8[(wave_phase >> 24) & 0xFF];
@@ -82,17 +82,17 @@ void JammerProcessor::execute(const buffer_c8_t& buffer) {
                 wave_phase += static_cast<uint32_t>(0x01000000 * (1.0f + chirp_freq));
                 sample = sine_table_i8[(wave_phase >> 24) & 0xFF];
             } else if (noise_type == jammer::JammerType::TYPE_GAUSSIAN) {
-                float u1 = static_cast<float>(lfsr & 0xFFFF) / 0x10000;
-                float u2 = static_cast<float>((lfsr >> 16) & 0xFFFF) / 0x10000;
+                float u1 = static_cast<float>(lfsr1 & 0xFFFF) / 0x10000;
+                float u2 = static_cast<float>((lfsr1 >> 16) & 0xFFFF) / 0x10000;
                 float gaussian = std::sqrt(-2.0f * std::log(u1)) * std::cos(2 * M_PI * u2);
                 sample = static_cast<int8_t>(gaussian * 32);
             } else if (noise_type == jammer::JammerType::TYPE_BRUTEFORCE) {
                 sample = 127;
             }
 
-            feedback = ((lfsr >> 31) ^ (lfsr >> 29) ^ (lfsr >> 15) ^ (lfsr >> 11)) & 1;
-            lfsr = (lfsr << 1) | feedback;
-            if (!lfsr) lfsr = 0x1337;
+            uint32_t feedback = ((lfsr1 >> 31) ^ (lfsr1 >> 29) ^ (lfsr1 >> 15) ^ (lfsr1 >> 11)) & 1;
+            lfsr1 = (lfsr1 << 1) | feedback;
+            if (!lfsr1) lfsr1 = 0x1337;
         } else {
             period_counter--;
         }
@@ -139,7 +139,7 @@ void JammerProcessor::on_message(const Message* const msg) {
             // Initialize LFSR states for optimized noise generation
             lfsr1 = 0xDEADBEEF;
             lfsr2 = 0xCAFEBABE;
-            lfsr = 0xDEAD0012;
+            lfsr1 = 0xDEAD0012;
             wave_phase = 0;
             wave_index = 0;
             chirp_freq = 0.0f;

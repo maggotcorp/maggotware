@@ -556,6 +556,13 @@ DeclareTargets(PUSB sd_over_usb)
 set(add_to_firmware FALSE)
 set(MODE_FLAGS "-O3")
 
+### FLEX RX
+
+set(MODE_CPPSRC
+	proc_flex.cpp
+)
+DeclareTargets(PFLX flex)
+
 ### ACARS RX
 
 set(MODE_CPPSRC
@@ -588,8 +595,10 @@ DeclareTargets(PNRR nrfrx)
 
 ### Jammer
 
+set(MODE_INCDIR ${PROJECT_SOURCE_DIR}/../application ${PROJECT_SOURCE_DIR}/../application/hw ${PROJECT_SOURCE_DIR}/../application/ui)
 set(MODE_CPPSRC
 	proc_jammer.cpp
+	${COMMON}/jammer.cpp
 )
 DeclareTargets(PJAM jammer)
 
@@ -643,6 +652,13 @@ set(MODE_CPPSRC
 	proc_sstvtx.cpp
 )
 DeclareTargets(PSTX sstvtx)
+
+### SSTV RX
+
+set(MODE_CPPSRC
+	proc_sstvrx.cpp
+)
+DeclareTargets(PSRX sstvrx)
 
 ### TPMS
 
